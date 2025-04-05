@@ -1,0 +1,223 @@
+:root {
+  /* Using darker Tailwind stone colors for a shadcn/ui look */
+  --background: #0c0a09; /* stone-950 */
+  --background-secondary: #1c1917; /* stone-900 */
+  --foreground: #f5f5f4;
+  --muted: #44403c; /* stone-700 */
+  --muted-foreground: #78716c; /* stone-500 */
+  --card: #1c1917; /* stone-900 */
+  --card-foreground: #f5f5f4;
+  --border: #292524; /* stone-800 */
+  --input: #292524; /* stone-800 */
+  --primary: #78716c; /* stone-500 */
+  --primary-hover: #a8a29e; /* stone-400 */
+  --ring: #57534e; /* stone-600 */
+  --success: #059669; /* darker green */
+  --danger: #dc2626; /* darker red */
+  --text: #f5f5f4;
+  --text-secondary: #d6d3d1;
+  --shadow: rgba(0, 0, 0, 0.3);
+
+  --transition-speed: 0.15s;
+  --border-radius: 6px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 400px; /* max: 800px */
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  width: 400px;
+  color: var(--text);
+  background-color: var(--background);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.container {
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  background-color: var(--primary);
+  color: var(--background);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 16px;
+}
+
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list-section {
+  background-color: var(--background-secondary);
+  border-radius: var(--border-radius);
+  padding: 12px;
+  box-shadow: 0 2px 4px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.list-wrapper {
+  position: relative;
+  min-height: 40px;
+}
+
+.domain-list {
+  list-style-type: none;
+}
+
+.domain-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  background-color: var(--background);
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  border-left: 3px solid var(--primary);
+  box-shadow: 0 1px 2px var(--shadow);
+  transition: transform var(--transition-speed);
+}
+
+.domain-list li:hover {
+  transform: translateX(2px);
+}
+
+#blockedList li {
+  border-left-color: var(--danger);
+}
+
+#whitelistedList li {
+  border-left-color: var(--success);
+}
+
+.empty-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-style: italic;
+  display: none;
+}
+
+.domain-list:empty + .empty-state {
+  display: block;
+}
+
+/* Status indicators */
+.blocking {
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.allowed {
+  color: var(--success);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 360px) {
+  body {
+    width: 100%;
+  }
+
+  .btn-text {
+    display: none;
+  }
+
+  .btn-icon {
+    font-size: 18px;
+  }
+}
+
+.status-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: var(--border-radius);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border);
+}
+
+.status-label {
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.status-blocking {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.status-allowed {
+  color: var(--success);
+  font-weight: 600;
+}
+

@@ -1,21 +1,44 @@
-<!--eslint-disable max-len-->
 <template>
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7.33325 7.33337V3.33337H8.66659V7.33337H12.6666V8.66671H8.66659V12.6667H7.33325V8.66671H3.33325V7.33337H7.33325Z"
-      fill="#828282"
-    />
-  </svg>
+  <div class="content">
+    <BackButton route="/app" />
+    <h3>Add Website</h3>
+    <form v-on:submit.prevent="add" class="form">
+      <div class="input-field">
+        <label>Site url (e.g http://google.com)</label>
+        <input v-model="siteurl" type="url" />
+      </div>
+      <button type="submit" class="btn dark save">Add</button>
+    </form>
+  </div>
 </template>
 
 <script>
+import utils, { CONFIGKEY } from '../assets/js/utils';
+import BackButton from './molecules/BackButton';
+
 export default {
-  name: 'AddIcon'
+  components: { BackButton },
+  name: 'Add',
+  data() {
+    return {
+      siteurl: ''
+    };
+  },
+  methods: {
+    async add() {
+      if (this.siteurl) {
+        const allSites = await utils.getData(CONFIGKEY);
+        const name = utils.getName(this.siteurl);
+        allSites[name.toLowerCase()] = {
+          control: false,
+          time: 0,
+          url: this.siteurl
+        };
+        await utils.saveConfiguration(CONFIGKEY, allSites);
+        this.siteurl = '';
+        this.$router.push('app');
+      }
+    }
+  }
 };
 </script>
