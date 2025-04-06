@@ -1,1 +1,1 @@
-# Tenjaku
+# Tenjiku
